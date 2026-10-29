@@ -1,0 +1,11 @@
+# 将 _SRC_DIR 下的 *.dll 拷到 _DST_DIR（目录不存在则跳过）
+if(NOT DEFINED _SRC_DIR OR NOT DEFINED _DST_DIR)
+  return()
+endif()
+if(NOT EXISTS "${_SRC_DIR}")
+  return()
+endif()
+file(GLOB _dlls "${_SRC_DIR}/*.dll")
+foreach(_dll IN LISTS _dlls)
+  file(COPY "${_dll}" DESTINATION "${_DST_DIR}")
+endforeach()
